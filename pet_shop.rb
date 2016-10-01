@@ -61,7 +61,7 @@ def customer_pet_count(customer_index)
 end
 
 def add_pet_to_customer(customer_index, pet)
-  customer_index[:pets].push(pet)
+  customer_index[:pets] << pet
 end
 
 def customer_can_afford_pet(customer_index, pet)
@@ -70,18 +70,13 @@ end
 
 def sell_pet_to_customer(shop, pet, customer_index)
   
-  # check pet is available  AND  customer can afford it
-  if find_pet_by_name(shop, pet[:name]) != nil
-  # && customer_can_afford_pet(customer_index, pet)
+  if pet != nil && customer_can_afford_pet(customer_index, pet)
 
-    # add pet hash to customer
     add_pet_to_customer(customer_index, pet)
-    # increase shop's pets sold value by 1
+    remove_pet_by_name(shop, pet[:name])
     increase_pets_sold(shop, 1)
-    # add price of pet to shop cash total
     add_or_remove_cash(shop, pet[:price])
 
-  else
-    puts "Sorry, no sale."
   end
+
 end
