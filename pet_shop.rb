@@ -25,13 +25,13 @@ def stock_count(shop)
 end
 
 def pets_by_breed(shop, breed)
-  breed_matches = []
+  matches_by_breed = []
   for pet in shop[:pets]
     if pet[:breed] == breed
-      breed_matches << pet[:name]
+      matches_by_breed << pet[:name]
     end
   end
-  return breed_matches
+  return matches_by_breed
 end
 
 def find_pet_by_name(shop, name)  
@@ -68,8 +68,7 @@ def customer_can_afford_pet(customer_index, pet)
   customer_index[:cash] >= pet[:price]
 end
 
-def sell_pet_to_customer(shop, pet, customer_index)
-  
+def sell_pet_to_customer(shop, pet, customer_index) 
   if pet != nil && customer_can_afford_pet(customer_index, pet)
 
     add_pet_to_customer(customer_index, pet)
@@ -78,5 +77,4 @@ def sell_pet_to_customer(shop, pet, customer_index)
     add_or_remove_cash(shop, pet[:price])
 
   end
-
 end
